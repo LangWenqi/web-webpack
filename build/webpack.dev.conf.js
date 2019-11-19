@@ -56,7 +56,6 @@ const htmls = Object.keys(pages.alls).map(function(pageKey) {
     inject: true
   });
 });
-console.log(htmls);
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
@@ -102,7 +101,13 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         to: config.dev.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+		new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      jquery: "jquery",
+      "window.jQuery": "jquery"
+    })
   ].concat(htmls)
 })
 
